@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 911423718828361334}
   - component: {fileID: 4174906893412028994}
   - component: {fileID: 866262410540212242}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2931828591702073934}
   - component: {fileID: 5702729369781965610}
-  m_Layer: 0
+  - component: {fileID: -4707798715562061953}
+  - component: {fileID: 393580107474689726}
+  m_Layer: 8
   m_Name: Flame arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,6 +150,42 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-4707798715562061953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1754208370366005754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf56c27ff05d67c46af33b159a99a999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 25
+--- !u!136 &393580107474689726
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1754208370366005754}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.27
+  m_Height: 0.89
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2751798148728859152
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +198,7 @@ GameObject:
   - component: {fileID: 1868136148046583274}
   - component: {fileID: 6070858653683376616}
   - component: {fileID: 2371869038826430176}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +305,7 @@ GameObject:
   - component: {fileID: 4414791167985347707}
   - component: {fileID: 4296228082352441124}
   - component: {fileID: 3179375628267742981}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5097,9 +5135,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2931828591702073934}
     m_Modifications:
+    - target: {fileID: 5553675047744941153, guid: 0226fbbe7f571b3429b33aad21af5cb0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5631185289765704975, guid: 0226fbbe7f571b3429b33aad21af5cb0, type: 3}
       propertyPath: m_Name
       value: Cylinder
+      objectReference: {fileID: 0}
+    - target: {fileID: 5631185289765704975, guid: 0226fbbe7f571b3429b33aad21af5cb0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468851280237289115, guid: 0226fbbe7f571b3429b33aad21af5cb0, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7714234145181277448, guid: 0226fbbe7f571b3429b33aad21af5cb0, type: 3}
       propertyPath: m_LocalPosition.x
