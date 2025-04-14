@@ -19,4 +19,7 @@ public class PlayerStatus : MonoBehaviour
      
     public bool usingController = false;
 
+    public bool isLocked = false; 
+
+
 }
