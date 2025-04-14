@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyStats : MonoBehaviour
 {
     [SerializeField] float health;
-   
+    [SerializeField] public bool chasing;
 
 
     public void TakeDamage(float dmg)
