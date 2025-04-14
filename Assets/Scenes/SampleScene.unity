@@ -1079,16 +1079,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStatus: {fileID: 1805726380}
-  arrowPrefab: {fileID: 1754208370366005754, guid: 3217ea3ba2a243e4590e47d8def3cad7, type: 3}
+  arrowPrefab: {fileID: 8586832275693084979, guid: bfa61d8be3585f646bac7762dbd9c764, type: 3}
   fireArrowPrefab: {fileID: 1754208370366005754, guid: b7d4d5c00a6ac144696b3c4fa947cba6, type: 3}
   shootPos: {fileID: 800814434}
   teste: 0
   basicAtackCooldown: 1.5
+  secondaryAtackCooldown: 0
+  secondaryAtackHitbox: {fileID: 0}
   skill1Atcive: 0
   skill1Cooldown: 4
   skill1Duration: 5
   skill1IsCooldown: 0
-  secondaryAtackCooldown: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
