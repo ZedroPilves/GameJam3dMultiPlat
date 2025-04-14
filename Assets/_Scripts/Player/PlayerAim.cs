@@ -6,19 +6,27 @@ public class PlayerAim : MonoBehaviour
     [Header("References")]
     [SerializeField] PlayerInput playerInputs;
     [SerializeField] PlayerStatus playerStatus;
+    [SerializeField] NearestEnemy nearestEnemy;
+
 
     private InputAction aimAction;
+    private InputAction lockAction;
 
+
+    [SerializeField] bool isAimlocked = false;
+    
     void Start()
     {
         playerStatus = GetComponent<PlayerStatus>();
         playerInputs = GetComponent<PlayerInput>();
         aimAction = playerInputs.actions["Aim"];
+        lockAction = playerInputs.actions["LockAim"];
+        nearestEnemy = GetComponent<NearestEnemy>();
     }
 
     void Update()
     {
-        if (playerStatus.usingController && playerStatus.canMove)
+        if (playerStatus.usingController && playerStatus.canMove && !isAimlocked)
         {
             Vector2 aimInput = aimAction.ReadValue<Vector2>();
 
@@ -30,11 +38,26 @@ public class PlayerAim : MonoBehaviour
                 transform.rotation = rotation;
             }
         }
-        else if(!playerStatus.usingController && playerStatus.canMove) 
+        else if(!playerStatus.usingController && playerStatus.canMove && !isAimlocked) 
         {
 
             RotateTowardMouse();
         }
+
+        if(lockAction.triggered && playerStatus.canMove)
+        {
+            isAimlocked = !isAimlocked;
+          
+           
+        }
+
+
+        if(isAimlocked)
+        {
+           
+        }
+
+
     }
 
 

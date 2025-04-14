@@ -5,10 +5,11 @@ using UnityEngine.InputSystem;
 
 public class BowManActions : MonoBehaviour
 {
+    [Header("Basic References")]
     private PlayerInput playerInputs;
     [SerializeField] PlayerStatus playerStatus;
 
-
+    [Header("Basic Atack")]
     [SerializeField] GameObject arrowPrefab;
     [SerializeField] GameObject fireArrowPrefab;
     [SerializeField] Transform shootPos;
@@ -16,11 +17,14 @@ public class BowManActions : MonoBehaviour
     [SerializeField] float basicAtackCooldown;
     private bool basickAtackisCooldown;
 
-    
+
+    [Header("Secondary Atack")]
     [SerializeField] float secondaryAtackCooldown;
     [SerializeField] GameObject secondaryAtackHitbox;
+    private bool secondaryAtackisCooldown;
 
 
+    [Header("Skill 1")]
     [SerializeField] bool skill1Atcive;
     [SerializeField] float skill1Cooldown;
     [SerializeField] float skill1Duration;
@@ -47,7 +51,10 @@ public class BowManActions : MonoBehaviour
             StartCoroutine((BasickAtack(fireArrowPrefab)));
         }
 
-
+        if(playerInputs.actions["SecondaryAtack"].triggered && !secondaryAtackisCooldown && playerStatus.canMove)
+        {
+            StartCoroutine(SecondaryAtack());
+        }
 
 
 
@@ -75,6 +82,27 @@ public class BowManActions : MonoBehaviour
             yield return new WaitForSeconds(basicAtackCooldown);
             basickAtackisCooldown = false;
         }
+
+
+        IEnumerator SecondaryAtack()
+        {
+            secondaryAtackisCooldown = true;
+            secondaryAtackHitbox.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+
+            secondaryAtackHitbox.SetActive(false);
+            yield return new WaitForSeconds(secondaryAtackCooldown);
+            secondaryAtackisCooldown = false;
+
+        }   
+
+
+
+
+
+
+
+
 
         IEnumerator Skill1(float buffDuration)
         {
