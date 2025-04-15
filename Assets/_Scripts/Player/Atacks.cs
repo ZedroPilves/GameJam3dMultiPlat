@@ -30,7 +30,7 @@ public class Atacks : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy") // Assuming layer 6 is the enemy layer
+        if (other.gameObject.CompareTag("Enemy")) // Use CompareTag for better performance
         {
             Debug.Log("Collided with enemy");
             EnemyStats enemyStats = other.gameObject.GetComponent<EnemyStats>();
@@ -39,8 +39,25 @@ public class Atacks : MonoBehaviour
                 enemyStats.TakeDamage(damage);
                 print("Player dealt " + damage + " damage to the enemy.");
             }
-            else { print("No EnemyStats component found on the collided object."); }
-           
+            else
+            {
+                print("No EnemyStats component found on the collided object.");
+            }
+        }
+
+        if (other.gameObject.CompareTag("Player")) // Use CompareTag for better performance
+        {
+            Debug.Log("Collided with player");
+            PlayerStatus playerStats = other.gameObject.GetComponent<PlayerStatus>();
+            if (playerStats != null)
+            {
+                playerStats.TakeDamage(damage);
+                print("Enemy dealt " + damage + " damage to the player.");
+            }
+            else
+            {
+                print("No PlayerStats component found on the collided object.");
+            }
         }
     }
 }
