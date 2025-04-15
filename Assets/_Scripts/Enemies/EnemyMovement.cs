@@ -24,9 +24,9 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Chase")]
     [SerializeField] float chaseDistance = 10f;
-    [SerializeField] Transform chaseTarget;
+   
 
-    [SerializeField] float chaseSpeed = 0f;
+    [SerializeField] float chaseSpeed = 5f;
 
     [SerializeField] float attackDistance = 1.5f;
 
@@ -62,14 +62,18 @@ public class EnemyMovement : MonoBehaviour
                 target = closestPlayer;
                 agent.SetDestination(target.position);
                 enemyStats.chasing = true;
-                agent.speed = 5f; // Speed when chasing the player
+                agent.speed = chaseSpeed; // Speed when chasing the player
                 Debug.Log("Perseguindo o jogador");
 
                 // Compare the distance between the closest player and this object's transform
                 float distanceToClosestPlayer = Vector3.Distance(transform.position, closestPlayer.position);
                 if(distanceToClosestPlayer < attackDistance)
                 {
-                    enemyAnimation.StartCoroutine(enemyAnimation.Attack()); 
+                    agent.speed = agent.speed * 0.80f; // Slow down when close to the player
+                    enemyAnimation.StartCoroutine(enemyAnimation.Attack());
+                }else if (distanceToClosestPlayer > attackDistance)
+                {
+                    agent.speed = chaseSpeed; // Reset speed when not close to the player
                 }
             }
             else

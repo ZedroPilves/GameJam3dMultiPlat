@@ -8,7 +8,7 @@ public class EnemyAnimation : MonoBehaviour
     [SerializeField] EnemyMovement enemyMovement;
     [SerializeField] GameObject attackZone;
 
-    [SerializeField] bool canAttack;
+    [SerializeField] bool canAttack = true;
 
     private void Start()
     {
