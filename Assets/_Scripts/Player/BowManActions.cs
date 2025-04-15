@@ -8,6 +8,7 @@ public class BowManActions : MonoBehaviour
     [Header("Basic References")]
     private PlayerInput playerInputs;
     [SerializeField] PlayerStatus playerStatus;
+    [SerializeField] PlayerUIManager playerUIManager;
 
     [Header("Basic Atack")]
     [SerializeField] GameObject arrowPrefab;
@@ -36,6 +37,8 @@ public class BowManActions : MonoBehaviour
     void Start()
     {
         playerInputs = GetComponent<PlayerInput>();
+        playerStatus = GetComponent<PlayerStatus>();
+        playerUIManager = GetComponent<PlayerUIManager>();  
     }
 
     // Update is called once per frame
@@ -87,6 +90,7 @@ public class BowManActions : MonoBehaviour
         IEnumerator SecondaryAtack()
         {
             secondaryAtackisCooldown = true;
+           
             secondaryAtackHitbox.SetActive(true);
             yield return new WaitForSeconds(0.2f);
 
@@ -107,7 +111,7 @@ public class BowManActions : MonoBehaviour
         IEnumerator Skill1(float buffDuration)
         {
             skill1IsCooldown = true;
-        
+            playerUIManager.BuffDuration(buffDuration);
             StartCoroutine(Skill1Duration(buffDuration));
 
 
