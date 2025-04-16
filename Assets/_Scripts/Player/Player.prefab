@@ -56,8 +56,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStatus: {fileID: 7353131625033118376}
   playerUIManager: {fileID: 0}
-  arrowPrefab: {fileID: 1754208370366005754, guid: 3217ea3ba2a243e4590e47d8def3cad7, type: 3}
-  fireArrowPrefab: {fileID: 1754208370366005754, guid: b7d4d5c00a6ac144696b3c4fa947cba6, type: 3}
+  playerAnimation: {fileID: 0}
+  arrowPrefab: {fileID: 1754208370366005754, guid: 6017e1bcf95ea7c40951d0440afbca71, type: 3}
+  fireArrowPrefab: {fileID: 1754208370366005754, guid: 3217ea3ba2a243e4590e47d8def3cad7, type: 3}
   shootPos: {fileID: 5211572407905513287}
   teste: 0
   basicAtackCooldown: 1.5
@@ -80,6 +81,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInputs: {fileID: 0}
+  moveAction:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b84f9b93-ec38-4075-a310-0357ae5db72e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  playerAnimation: {fileID: 0}
   playerStatus: {fileID: 0}
   rb: {fileID: 0}
   moveSpeed: 5
