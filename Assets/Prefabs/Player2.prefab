@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2565736963487690011}
   - component: {fileID: 4018996392071171297}
   - component: {fileID: 4015411131355764223}
+  - component: {fileID: 4425650389082975169}
   - component: {fileID: 4242492928014369518}
   - component: {fileID: 6592299464668502034}
   - component: {fileID: 4372619976797126650}
@@ -216,6 +217,31 @@ MonoBehaviour:
   playerMovement: {fileID: 0}
   moveInput: {x: 0, y: 0}
   animator: {fileID: 5434570375285953785}
+--- !u!114 &4425650389082975169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279959846928854312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96139e5def276d4e8f5051f67ccc518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetGroup: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  inputActionSpawn:
+    m_Name: Input Action Spawn
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 685e8a87-8f2b-48a9-8abf-e391a2fb4c24
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  playerInput: {fileID: 4372619976797126650}
+  canSpawnPlayer: 1
 --- !u!136 &4242492928014369518
 CapsuleCollider:
   m_ObjectHideFlags: 0
