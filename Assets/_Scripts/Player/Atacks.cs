@@ -24,7 +24,7 @@ public class Atacks : MonoBehaviour
             Destroy(gameObject); // Destroy the arrow after collision   
         }
 
-
+        Destroy(gameObject); // Destroy the arrow after collision
     }
 
 
