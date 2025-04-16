@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -36,7 +37,11 @@ public class PlayerStatus : MonoBehaviour
     {
         health -= dmg;
        playerUIManager.DeplenishHealth();
-         
+        if (health <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }   
+
     }
 
 }

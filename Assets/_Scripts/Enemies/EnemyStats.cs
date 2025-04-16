@@ -9,6 +9,9 @@ public class EnemyStats : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         health -= dmg;  
-        print("Enemy took " + dmg + " damage. Health left: " + health);
+       if(health <= 0)
+        {
+            Destroy(gameObject);
+        }       
     } 
 }
