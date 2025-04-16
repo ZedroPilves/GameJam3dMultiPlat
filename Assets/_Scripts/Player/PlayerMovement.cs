@@ -5,8 +5,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] PlayerInput playerInputs;
-    InputAction moveAction;
+    public InputAction moveAction;
     InputAction dogeAction;
+    [SerializeField] PlayerAnimation playerAnimation;
     [SerializeField] PlayerStatus playerStatus;   
 
     [SerializeField] Rigidbody rb;
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        playerAnimation = GetComponent<PlayerAnimation>();
         playerStatus = GetComponent<PlayerStatus>();
         playerInputs = GetComponent<PlayerInput>();
         moveAction = playerInputs.actions["Move"];
@@ -57,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerStatus.canMove = false;
         playerStatus.isInvincible = true;
-
+        playerAnimation.animator.SetTrigger("roll");
         Vector2 moveInput = moveAction.ReadValue<Vector2>();
 
         if (moveInput.sqrMagnitude > 0.01f)

@@ -9,7 +9,7 @@ public class BowManActions : MonoBehaviour
     private PlayerInput playerInputs;
     [SerializeField] PlayerStatus playerStatus;
     [SerializeField] PlayerUIManager playerUIManager;
-
+    [SerializeField] PlayerAnimation playerAnimation;
     [Header("Basic Atack")]
     [SerializeField] GameObject arrowPrefab;
     [SerializeField] GameObject fireArrowPrefab;
@@ -37,6 +37,7 @@ public class BowManActions : MonoBehaviour
     void Start()
     {
         playerInputs = GetComponent<PlayerInput>();
+        playerAnimation = GetComponent<PlayerAnimation>();  
         playerStatus = GetComponent<PlayerStatus>();
         playerUIManager = GetComponent<PlayerUIManager>();  
     }
@@ -72,7 +73,7 @@ public class BowManActions : MonoBehaviour
         IEnumerator BasickAtack(GameObject obj)
         {
             basickAtackisCooldown = true;
-
+            playerAnimation.animator.SetTrigger("shoot");
             GameObject projectile = obj;
            GameObject arrowinstance = Instantiate(projectile, shootPos.position, shootPos.rotation);
 
@@ -90,7 +91,8 @@ public class BowManActions : MonoBehaviour
         IEnumerator SecondaryAtack()
         {
             secondaryAtackisCooldown = true;
-           
+           playerAnimation.animator.SetTrigger("Punch");
+            yield return new WaitForSeconds(0.2f);
             secondaryAtackHitbox.SetActive(true);
             yield return new WaitForSeconds(0.2f);
 
