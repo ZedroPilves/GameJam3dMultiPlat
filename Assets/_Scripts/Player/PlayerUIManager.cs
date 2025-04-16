@@ -11,6 +11,9 @@ public class PlayerUIManager : MonoBehaviour
     [SerializeField] float depletionSpeed = 0.5f; // Speed of health bar depletion
 
     [SerializeField] Image buffImage;
+    public Image cooldownImageBasickAtack;
+    public Image cooldownImageSecondAtack;
+    public Image cooldownImageSkill;
     [SerializeField] GameObject buffCounter;
 
 
@@ -50,6 +53,33 @@ public class PlayerUIManager : MonoBehaviour
     }
 
 
+    public void StartSkillCooldownFade(Image cooldownImage, float cooldownDuration)
+    {
+        StartCoroutine(FadeImageOverCooldown(cooldownImage, cooldownDuration));
+    }
+
+    private IEnumerator FadeImageOverCooldown(Image img, float duration)
+    {
+        Color color = img.color;
+        color.a = 215f / 255f; // Start at alpha 215
+        img.color = color;
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(215f / 255f, 0f, elapsed / duration);
+            color.a = newAlpha;
+            img.color = color;
+
+            yield return null;
+        }
+
+        // Ensure fully transparent at the end
+        color.a = 0f;
+        img.color = color;
+    }
 
 
 
