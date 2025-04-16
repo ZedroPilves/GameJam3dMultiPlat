@@ -73,6 +73,7 @@ public class BowManActions : MonoBehaviour
         IEnumerator BasickAtack(GameObject obj)
         {
             basickAtackisCooldown = true;
+            playerUIManager.StartSkillCooldownFade(playerUIManager.cooldownImageBasickAtack, basicAtackCooldown);
             playerAnimation.animator.SetTrigger("shoot");
             GameObject projectile = obj;
            GameObject arrowinstance = Instantiate(projectile, shootPos.position, shootPos.rotation);
@@ -91,7 +92,8 @@ public class BowManActions : MonoBehaviour
         IEnumerator SecondaryAtack()
         {
             secondaryAtackisCooldown = true;
-           playerAnimation.animator.SetTrigger("Punch");
+            playerUIManager.StartSkillCooldownFade(playerUIManager.cooldownImageSecondAtack, secondaryAtackCooldown);
+            playerAnimation.animator.SetTrigger("Punch");
             yield return new WaitForSeconds(0.2f);
             secondaryAtackHitbox.SetActive(true);
             yield return new WaitForSeconds(0.2f);
@@ -113,6 +115,7 @@ public class BowManActions : MonoBehaviour
         IEnumerator Skill1(float buffDuration)
         {
             skill1IsCooldown = true;
+            playerUIManager.StartSkillCooldownFade(playerUIManager.cooldownImageSkill, skill1Cooldown); 
             playerUIManager.BuffDuration(buffDuration);
             StartCoroutine(Skill1Duration(buffDuration));
 
