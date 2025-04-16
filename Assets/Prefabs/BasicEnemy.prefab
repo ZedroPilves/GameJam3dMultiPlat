@@ -197,8 +197,6 @@ MonoBehaviour:
   enemyAnimation: {fileID: 0}
   animator: {fileID: 5065902067494532820}
   waypointThreshold: 0.2
-  patrolPoints: []
-  currentPoint: 0
   maxDistFromPoint: 20
   target: {fileID: 0}
   players: []
@@ -217,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bc30fa4ef233a459c941badfef9888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 0.24
   chasing: 0
 --- !u!95 &5065902067494532820
 Animator:
