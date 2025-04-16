@@ -1,63 +1,86 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class OptionsMenu : MonoBehaviour
 {
+    [Header("Painel de Opções (apenas ele)")]
     public GameObject optionsPanel;
+
+    [Header("Componentes de UI")]
     public TMP_Dropdown resolutionDropdown;
     public Toggle fullscreenToggle;
 
     private Resolution[] resolutions;
+    private List<Resolution> filteredResolutions = new List<Resolution>();
 
     void Start()
     {
+        // Carrega resoluções disponíveis e remove duplicadas
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
 
-        int currentResolutionIndex = 0;
-        var options = new System.Collections.Generic.List<string>();
+        List<string> options = new List<string>();
+        HashSet<string> added = new HashSet<string>();
+
+        int defaultIndex = 0;
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            if (!options.Contains(option)) // evitar resoluções repetidas
-                options.Add(option);
+            string res = resolutions[i].width + " x " + resolutions[i].height;
 
-            if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
+            if (!added.Contains(res))
             {
-                currentResolutionIndex = i;
+                added.Add(res);
+                options.Add(res);
+                filteredResolutions.Add(resolutions[i]);
+
+                if (resolutions[i].width == Screen.currentResolution.width &&
+                    resolutions[i].height == Screen.currentResolution.height)
+                {
+                    defaultIndex = filteredResolutions.Count - 1;
+                }
             }
         }
 
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionIndex;
+
+        // Carrega configurações salvas
+        int savedIndex = PlayerPrefs.GetInt("resolutionIndex", defaultIndex);
+        bool isFullscreen = PlayerPrefs.GetInt("fullscreen", 1) == 1;
+
+        resolutionDropdown.value = savedIndex;
         resolutionDropdown.RefreshShownValue();
+        fullscreenToggle.isOn = isFullscreen;
 
-        fullscreenToggle.isOn = Screen.fullScreen;
+        // Garante que o painel comece desativado
+        if (optionsPanel != null)
+            optionsPanel.SetActive(false);
     }
 
-    public void SetResolution(int index)
+    public void ApplySettings()
     {
-        string[] res = resolutionDropdown.options[index].text.Split('x');
-        int width = int.Parse(res[0]);
-        int height = int.Parse(res[1]);
-        Screen.SetResolution(width, height, Screen.fullScreen);
-    }
+        int index = resolutionDropdown.value;
+        Resolution selected = filteredResolutions[index];
+        bool isFullscreen = fullscreenToggle.isOn;
 
-    public void SetFullscreen(bool isFullscreen)
-    {
-        Screen.fullScreen = isFullscreen;
+        Screen.SetResolution(selected.width, selected.height, isFullscreen);
+
+        PlayerPrefs.SetInt("resolutionIndex", index);
+        PlayerPrefs.SetInt("fullscreen", isFullscreen ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     public void OpenOptions()
     {
-        optionsPanel.SetActive(true);
+        if (optionsPanel != null)
+            optionsPanel.SetActive(true);
     }
 
     public void CloseOptions()
     {
-        optionsPanel.SetActive(false);
+        if (optionsPanel != null)
+            optionsPanel.SetActive(false);
     }
 }
