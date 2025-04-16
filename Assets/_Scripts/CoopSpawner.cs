@@ -6,6 +6,7 @@ public class CoopSpawner : MonoBehaviour
 {
   
     [SerializeField] CinemachineTargetGroup targetGroup;
+    [SerializeField] GameObject canva;
     [SerializeField] Transform spawnPoint;
     [SerializeField] InputAction inputActionSpawn;
     [SerializeField] PlayerInput playerInput;
@@ -22,7 +23,9 @@ public class CoopSpawner : MonoBehaviour
     {
         if(inputActionSpawn.IsPressed() && canSpawnPlayer)
         {
-          transform.position = spawnPoint.position;
+            canSpawnPlayer = false; 
+            transform.position = spawnPoint.position;
+            canva.SetActive(true);
             targetGroup.AddMember(gameObject.transform, 1, 0.5f);   
         }
     }
