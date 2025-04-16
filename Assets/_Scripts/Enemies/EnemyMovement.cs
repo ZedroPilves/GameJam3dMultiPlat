@@ -6,11 +6,10 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] EnemyStats enemyStats;
 
-
     [Header("Navigation")]
-    [SerializeField] NavMeshAgent agent;
+    public NavMeshAgent agent;
     [SerializeField] Transform[] waypoints;
-
+    [SerializeField] EnemyAnimation enemyAnimation;
 
     [Header("Patrolling")]
     [SerializeField] float waypointThreshold = 0.2f;
@@ -25,12 +24,27 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Chase")]
     [SerializeField] float chaseDistance = 10f;
-    [SerializeField] Transform chaseTarget;
+   
+
+    [SerializeField] float chaseSpeed = 5f;
+
+    [SerializeField] float attackDistance = 1.5f;
+
     private void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
         enemyStats = GetComponent<EnemyStats>();
-        agent = GetComponent<NavMeshAgent>();    
+        enemyAnimation = GetComponent<EnemyAnimation>();    
+        agent = GetComponent<NavMeshAgent>();
+
+        // Fill waypoints with all objects tagged "NavMeshPoint"
+        GameObject[] waypointObjects = GameObject.FindGameObjectsWithTag("NavMeshPoint");
+        waypoints = new Transform[waypointObjects.Length];
+        for (int i = 0; i < waypointObjects.Length; i++)
+        {
+            waypoints[i] = waypointObjects[i].transform;
+        }
+
         GenerateRandomPatrol();
         MoveToCurrentPatrolPoint();
     }
@@ -47,8 +61,20 @@ public class EnemyMovement : MonoBehaviour
             {
                 target = closestPlayer;
                 agent.SetDestination(target.position);
-                enemyStats.chasing = true; // Set chasing to true when a player is close      
+                enemyStats.chasing = true;
+                agent.speed = chaseSpeed; // Speed when chasing the player
                 Debug.Log("Perseguindo o jogador");
+
+                // Compare the distance between the closest player and this object's transform
+                float distanceToClosestPlayer = Vector3.Distance(transform.position, closestPlayer.position);
+                if(distanceToClosestPlayer < attackDistance)
+                {
+                    agent.speed = agent.speed * 0.80f; // Slow down when close to the player
+                    enemyAnimation.StartCoroutine(enemyAnimation.Attack());
+                }else if (distanceToClosestPlayer > attackDistance)
+                {
+                    agent.speed = chaseSpeed; // Reset speed when not close to the player
+                }
             }
             else
             {
@@ -60,14 +86,12 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            // fallback to patrol behavior if no player is close
             if (target != null)
             {
                 agent.SetDestination(target.position);
             }
         }
 
-        // Patrolling behavior
         if (agent.remainingDistance <= waypointThreshold && !agent.pathPending)
         {
             if (Vector3.Distance(transform.position, target.position) < waypointThreshold)
@@ -82,7 +106,6 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-
     void GenerateRandomPatrol()
     {
         patrolPoints.Clear();
@@ -91,13 +114,12 @@ public class EnemyMovement : MonoBehaviour
         {
             distanceFromPatrol = Vector3.Distance(transform.position, point.position);
 
-            if (Random.Range(1, 4) == 1 && distanceFromPatrol <= maxDistFromPoint) // 1 in 3 chance
+            if (Random.Range(1, 4) == 1 && distanceFromPatrol <= maxDistFromPoint)
             {
                 patrolPoints.Add(point);
             }
         }
 
-        // Fallback: if none selected randomly, pick all
         if (patrolPoints.Count == 0)
         {
             patrolPoints.AddRange(waypoints);
@@ -112,9 +134,9 @@ public class EnemyMovement : MonoBehaviour
         Transform closest = null;
         float shortestDistance = Mathf.Infinity;
 
-        foreach (GameObject player in players) // Fix: Changed Transform to GameObject
+        foreach (GameObject player in players)
         {
-            Transform playerTransform = player.transform; // Fix: Access the Transform component of the GameObject
+            Transform playerTransform = player.transform;
             float distance = Vector3.Distance(transform.position, playerTransform.position);
             if (distance < shortestDistance && distance <= chaseDistance)
             {
@@ -125,7 +147,6 @@ public class EnemyMovement : MonoBehaviour
 
         return closest;
     }
-
 
     void ChangeTarget()
     {
