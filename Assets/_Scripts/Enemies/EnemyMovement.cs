@@ -11,6 +11,15 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] Transform[] waypoints;
     [SerializeField] EnemyAnimation enemyAnimation;
 
+
+    [Header("LookAt")]
+    [SerializeField] private Animator animator;
+    private GameObject pivot;
+    private float lookWeight = 0f;
+
+
+
+
     [Header("Patrolling")]
     [SerializeField] float waypointThreshold = 0.2f;
     [SerializeField] List<Transform> patrolPoints = new List<Transform>();
@@ -32,6 +41,13 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
+
+        animator = GetComponent<Animator>();
+
+        pivot = new GameObject("EnemyLookPivot");
+        pivot.transform.parent = transform;
+        pivot.transform.localPosition = new Vector3(0, 1.5f, 0); // Adjust height to head level
+
         players = GameObject.FindGameObjectsWithTag("Player");
         enemyStats = GetComponent<EnemyStats>();
         enemyAnimation = GetComponent<EnemyAnimation>();    
@@ -104,6 +120,18 @@ public class EnemyMovement : MonoBehaviour
                 ChangeTarget();
             }
         }
+        if (target != null && enemyStats.chasing)
+        {
+            // Look at target while chasing
+            pivot.transform.LookAt(target.position);
+            lookWeight = Mathf.Lerp(lookWeight, 1f, 3f * Time.deltaTime);
+        }
+        else
+        {
+            // Fade out look weight
+            lookWeight = Mathf.Lerp(lookWeight, 0f, 3f * Time.deltaTime);
+        }
+
     }
 
     void GenerateRandomPatrol()
@@ -172,4 +200,17 @@ public class EnemyMovement : MonoBehaviour
             agent.SetDestination(target.position);
         }
     }
+
+
+    private void OnAnimatorIK(int layerIndex)
+    {
+        if (animator == null || target == null) return;
+
+        if (layerIndex == 2) // Or change to the layer you use for IK
+        {
+            animator.SetLookAtWeight(lookWeight);
+            animator.SetLookAtPosition(target.position + Vector3.up * 1.5f); // Adjust Y offset to match head height
+        }
+    }
+
 }
