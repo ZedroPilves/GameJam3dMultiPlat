@@ -142,7 +142,7 @@ public class EnemyMovement : MonoBehaviour
         {
             distanceFromPatrol = Vector3.Distance(transform.position, point.position);
 
-            if (Random.Range(1, 4) == 1 && distanceFromPatrol <= maxDistFromPoint)
+            if (Random.Range(1, 30) == 1 && distanceFromPatrol <= maxDistFromPoint)
             {
                 patrolPoints.Add(point);
             }

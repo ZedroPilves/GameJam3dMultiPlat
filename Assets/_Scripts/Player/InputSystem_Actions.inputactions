@@ -112,6 +112,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Player2Join",
+                    "type": "Button",
+                    "id": "82827586-7ec6-45ad-990a-0ef23622c0b0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -453,6 +462,17 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "LockAim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "89a9daca-59bc-402c-a0f7-369353fefbb8",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Player2Join",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
