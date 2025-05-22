@@ -36,6 +36,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_f4dabe43e2e5460e813da9d69c801107_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 3db9b43fe66b2d645833153ccf94bd59, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -54,14 +58,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DissolveAmount: 1.088
+    - _DissolveAmount: 1.02
     - _OutlineThickness: 0.01
-    - _SimpleNoiseScale: 111.13
-    - _TwirlStrengh: 1.6
-    - _VoronoiScale: 2.65
+    - _SimpleNoiseScale: 500
+    - _SimpleNoiseScale_1: 800
+    - _TwirlStrengh: 1
+    - _VoronoiPower: 0.01
+    - _VoronoiScale: 10
     m_Colors:
-    - _OutlineColor: {r: 1.174064, g: 0, b: 0, a: 1}
-    - _Speed: {r: -0.53, g: -0.93, b: 0, a: 0}
-    - _Speed_1: {r: -6, g: -6, b: 0, a: 0}
+    - _BaseColor: {r: 0.10062885, g: 0, b: 0, a: 0}
+    - _OutlineColor: {r: 4.1853843, g: 0, b: 0.15049328, a: 1}
+    - _Speed: {r: 0.2, g: 0.2, b: 0, a: 0}
+    - _Speed_1: {r: 2, g: 0, b: 0, a: 0}
+    - _Tilling: {r: 0.3, g: 2, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
