@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shader Graphs_DissolveUI
-  m_Shader: {fileID: -6465566751694194690, guid: b5575c19beba62743be5ba8b3a39cd11, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 3e39df9f104f55b48bcaf4f1fce7ff70, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -58,7 +58,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DissolveAmount: 1.0096
+    - _DissolveAmount: 0.30910382
     - _OutlineThickness: 0.01
     - _SimpleNoiseScale: 500
     - _SimpleNoiseScale_1: 800
